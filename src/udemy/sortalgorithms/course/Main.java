@@ -3,10 +3,74 @@ package udemy.sortalgorithms.course;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println(recursiveFactorial(5));
-        System.out.println(iterativeFactorial(5));
-        //int[] array = new int[]{5, 43, -21, 11, 0, -5};
-        //shellSort(array);
+        int[] array = new int[]{5, 43, -21, 11, 0, -5};
+        quickSort(array, 0, array.length);
+        for (int i : array) {
+            System.out.println(i);
+        }
+    }
+
+    private static void quickSort(int[] arr, int start, int end) {
+        if (end - start < 2)
+            return;
+
+        int pivot = partition(arr, start, end);
+        quickSort(arr, start, pivot);
+        quickSort(arr, pivot + 1, end);
+    }
+
+    private static int partition(int[] arr, int start, int end) {
+        int pivot = arr[start];
+
+        int i = start;
+        int j = end;
+
+        while (i < j) {
+            while (i < j && arr[--j] >= pivot) ;
+            if (i < j) {
+                arr[i] = arr[j];
+            }
+            while (i < j && arr[++i] <= pivot) ;
+            if (i < j) {
+                arr[j] = arr[i];
+            }
+        }
+        arr[j] = pivot;
+        return j;
+    }
+
+    /**
+     * <p>O(n*log(n)); Stable sort</p>
+     *
+     * @param arr   Array to sort
+     * @param start Start index of the array (sub-array)
+     * @param end   End index of the array (sub-array)
+     */
+
+    private static void mergeSort(int[] arr, int start, int end) {
+        if (end - start < 2)
+            return;
+        int mid = (start + end) / 2;
+        mergeSort(arr, start, mid);
+        mergeSort(arr, mid, end);
+        merge(arr, start, mid, end);
+    }
+
+    private static void merge(int[] arr, int start, int mid, int end) {
+        if (arr[mid - 1] <= arr[mid])
+            return;
+
+        int i = start;
+        int j = mid;
+        int tempIndex = 0;
+        int[] tempArray = new int[end - start];
+
+        while (i < mid && j < end) {
+            tempArray[tempIndex++] = arr[i] <= arr[j] ? arr[i++] : arr[j++];
+        }
+
+        System.arraycopy(arr, i, arr, start + tempIndex, mid - i);
+        System.arraycopy(tempArray, 0, arr, start, tempIndex);
     }
 
     private static int recursiveFactorial(int n) {
