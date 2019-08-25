@@ -3,10 +3,24 @@ package udemy.sortalgorithms.course;
 public class Main {
 
     public static void main(String[] args) {
-        int[] array = new int[]{5, 43, -21, 11, 0, -5};
-        quickSort(array, 0, array.length);
+        int[] array = new int[]{2, 5, 7, 1, 2, 3, 8, 9, 1, 4};
+        countingSort(array, 1, 10);
         for (int i : array) {
             System.out.println(i);
+        }
+    }
+
+    private static void countingSort(int[] arr, int min, int max) {
+        int[] countArray = new int[(max - min) + 1];
+        for (int i = 0; i < countArray.length; i++) {
+            countArray[arr[i] - min]++;
+        }
+        int j = 0;
+        for (int i = min; i <= max; i++) {
+            while (countArray[i - min] > 0) {
+                arr[j++] = i;
+                countArray[i - min]--;
+            }
         }
     }
 
