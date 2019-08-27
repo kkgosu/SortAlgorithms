@@ -3,11 +3,43 @@ package udemy.sortalgorithms.course;
 public class Main {
 
     public static void main(String[] args) {
+        int[] radixArray = {4725, 4586, 1330, 8792, 1594, 5729};
+        radixSort(radixArray, 10, 4);
         int[] array = new int[]{2, 5, 7, 1, 2, 3, 8, 9, 1, 4};
-        countingSort(array, 1, 10);
-        for (int i : array) {
+        //countingSort(array, 1, 10);
+        for (int i : radixArray) {
             System.out.println(i);
         }
+    }
+
+    private static void radixSort(int[] arr, int radix, int width) {
+        for (int i = 0; i < width; i++) {
+            radixSingleSort(arr, i, radix);
+        }
+    }
+
+    private static void radixSingleSort(int[] arr, int position, int radix) {
+        int numItems = arr.length;
+        int[] countArray = new int[radix];
+
+        for (int value : arr) {
+            countArray[getDigit(position, value, radix)]++;
+        }
+
+        for (int j = 1; j < radix; j++) {
+            countArray[j] += countArray[j - 1];
+        }
+
+        int[] temp = new int[numItems];
+        for (int tempIndex = numItems - 1; tempIndex >= 0; tempIndex--) {
+            temp[--countArray[getDigit(position, arr[tempIndex], radix)]] =
+                    arr[tempIndex];
+        }
+        System.arraycopy(temp, 0, arr, 0, numItems);
+    }
+
+    private static int getDigit(int position, int value, int radix) {
+        return value / (int) Math.pow(radix, position) % radix;
     }
 
     private static void countingSort(int[] arr, int min, int max) {
@@ -23,6 +55,14 @@ public class Main {
             }
         }
     }
+
+    /**
+     * <p>O(n*log(n))</p>
+     *
+     * @param arr   Array to sort
+     * @param start start index
+     * @param end   end index
+     */
 
     private static void quickSort(int[] arr, int start, int end) {
         if (end - start < 2)
