@@ -3,11 +3,11 @@ package udemy.sortalgorithms.course;
 public class Main {
 
     public static void main(String[] args) {
-        int[] radixArray = {4725, 4586, 1330, 8792, 1594, 5729};
-        radixSort(radixArray, 10, 4);
-        int[] array = new int[]{2, 5, 7, 1, 2, 3, 8, 9, 1, 4};
-        //countingSort(array, 1, 10);
-        for (int i : radixArray) {
+        //int[] radixArray = {4725, 4586, 1330, 8792, 1594, 5729};
+        //radixSort(radixArray, 10, 4);
+        int[] array = new int[]{-2, 5, -7, 1, 2, 3, 8, -9, 1, 4};
+        insertionSortRecursive(array, array.length);
+        for (int i : array) {
             System.out.println(i);
         }
     }
@@ -127,6 +127,30 @@ public class Main {
         System.arraycopy(tempArray, 0, arr, start, tempIndex);
     }
 
+    private static void mergeSortDescending(int[] arr, int start, int end) {
+        if (end - start < 2)
+            return;
+        int mid = (start + end) / 2;
+        mergeSortDescending(arr, start, mid);
+        mergeSortDescending(arr, mid, end);
+        mergeDescending(arr, start, mid, end);
+    }
+
+    private static void mergeDescending(int[] arr, int start, int mid, int end) {
+        if (arr[mid - 1] >= arr[mid])
+            return;
+        int i = start;
+        int j = mid;
+        int tempIndex = 0;
+        int[] tempArray = new int[end - start];
+
+        while (i < mid && j < end) {
+            tempArray[tempIndex++] = arr[i] >= arr[j] ? arr[i++] : arr[j++];
+        }
+        System.arraycopy(arr, i, arr, start + tempIndex, mid - i);
+        System.arraycopy(tempArray, 0, arr, start, tempIndex);
+    }
+
     private static int recursiveFactorial(int n) {
         if (n == 0)
             return 1;
@@ -186,6 +210,19 @@ public class Main {
         for (int i : arr) {
             System.out.println(i);
         }
+    }
+
+    private static void insertionSortRecursive(int[] arr, int numItems) {
+        if (numItems < 2)
+            return;
+
+        insertionSortRecursive(arr, numItems - 1);
+        int newElement = arr[numItems - 1];
+        int i;
+        for (i = numItems - 1; i > 0 && arr[i - 1] > newElement; i--) {
+            arr[i] = arr[i - 1];
+        }
+        arr[i] = newElement;
     }
 
     /**
