@@ -3,13 +3,43 @@ package udemy.sortalgorithms.course;
 public class Main {
 
     public static void main(String[] args) {
-        //int[] radixArray = {4725, 4586, 1330, 8792, 1594, 5729};
-        //radixSort(radixArray, 10, 4);
-        int[] array = new int[]{-2, 5, -7, 1, 2, 3, 8, -9, 1, 4};
-        insertionSortRecursive(array, array.length);
-        for (int i : array) {
+        String[] radixArray = {"bcdef", "dbaqc", "abcde", "omadd", "bbbbb"};
+        radixSortString(radixArray, 26, 5);
+       /* int[] array = new int[]{-2, 5, -7, 1, 2, 3, 8, -9, 1, 4};
+        insertionSortRecursive(array, array.length);*/
+        for (String i : radixArray) {
             System.out.println(i);
         }
+    }
+
+    private static void radixSortString(String[] arr, int radix, int width) {
+        for (int i = width - 1; i >= 0; i--) {
+            radixSingleSortString(arr, i, radix);
+        }
+    }
+
+    private static void radixSingleSortString(String[] arr, int position, int radix) {
+        int numItems = arr.length;
+        int[] countArray = new int[radix];
+
+        for (String value : arr) {
+            countArray[getIndex(value, position)]++;
+        }
+
+        for (int j = 1; j < radix; j++) {
+            countArray[j] += countArray[j - 1];
+        }
+
+        String[] temp = new String[numItems];
+        for (int tempIndex = numItems - 1; tempIndex >= 0; tempIndex--) {
+            temp[--countArray[getIndex(arr[tempIndex], position)]] =
+                    arr[tempIndex];
+        }
+        System.arraycopy(temp, 0, arr, 0, numItems);
+    }
+
+    private static int getIndex(String input, int position) {
+        return input.charAt(position) - 'a';
     }
 
     private static void radixSort(int[] arr, int radix, int width) {
