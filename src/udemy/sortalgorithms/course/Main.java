@@ -1,15 +1,18 @@
 package udemy.sortalgorithms.course;
 
+import udemy.lists.course.ListsCourse;
+
 public class Main {
 
     public static void main(String[] args) {
-        String[] radixArray = {"bcdef", "dbaqc", "abcde", "omadd", "bbbbb"};
+        ListsCourse.main();
+/*        String[] radixArray = {"bcdef", "dbaqc", "abcde", "omadd", "bbbbb"};
         radixSortString(radixArray, 26, 5);
-       /* int[] array = new int[]{-2, 5, -7, 1, 2, 3, 8, -9, 1, 4};
-        insertionSortRecursive(array, array.length);*/
+       *//* int[] array = new int[]{-2, 5, -7, 1, 2, 3, 8, -9, 1, 4};
+        insertionSortRecursive(array, array.length);*//*
         for (String i : radixArray) {
             System.out.println(i);
-        }
+        }*/
     }
 
     private static void radixSortString(String[] arr, int radix, int width) {
