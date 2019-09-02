@@ -1,11 +1,12 @@
 package udemy.sortalgorithms.course;
 
+import udemy.queue.course.QueueCourse;
 import udemy.stacks.course.StacksCourse;
 
 public class Main {
 
     public static void main(String[] args) {
-        StacksCourse.main();
+        QueueCourse.main();
 /*        String[] radixArray = {"bcdef", "dbaqc", "abcde", "omadd", "bbbbb"};
         radixSortString(radixArray, 26, 5);
        *//* int[] array = new int[]{-2, 5, -7, 1, 2, 3, 8, -9, 1, 4};
