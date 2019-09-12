@@ -1,12 +1,25 @@
 package udemy.sortalgorithms.course;
 
 import udemy.queue.course.QueueCourse;
+import udemy.stacks.course.Employee;
 import udemy.stacks.course.StacksCourse;
+
+import java.util.*;
 
 public class Main {
 
     public static void main(String[] args) {
-        QueueCourse.main();
+        LinkedList<Employee> employees = new LinkedList<>();
+        employees.add(new Employee("Jane", "Jones", 123));
+        employees.add(new Employee("John", "Doe", 5678));
+        employees.add(new Employee("Mike", "Wilson", 45));
+        employees.add(new Employee("Mary", "Smith", 5555));
+        employees.add(new Employee("John", "Doe", 5678));
+        employees.add(new Employee("Bill", "End", 3948));
+        employees.add(new Employee("Jane", "Jones", 123));
+
+        employees.forEach(e -> System.out.println(e));
+        //QueueCourse.main();
 /*        String[] radixArray = {"bcdef", "dbaqc", "abcde", "omadd", "bbbbb"};
         radixSortString(radixArray, 26, 5);
        *//* int[] array = new int[]{-2, 5, -7, 1, 2, 3, 8, -9, 1, 4};
@@ -14,6 +27,34 @@ public class Main {
         for (String i : radixArray) {
             System.out.println(i);
         }*/
+    }
+
+    private static int hash1(int value) {
+        return Math.abs(value % 10);
+    }
+
+    private static void bucketSort(int[] array) {
+        List<Integer>[] buckets = new List[10];
+        Arrays.fill(buckets, new ArrayList<Integer>());
+
+        for (int i = 0; i < array.length; i++) {
+            buckets[hash(i)].add(array[i]);
+        }
+
+        for (List list : buckets) {
+            Collections.sort(list);
+        }
+
+        int j = 0;
+        for (int i = 0; i < buckets.length; i++) {
+            for (int value : buckets[i]) {
+                array[j++] = value;
+            }
+        }
+    }
+
+    private static int hash(int value) {
+        return value / (int) 10;
     }
 
     private static void radixSortString(String[] arr, int radix, int width) {
