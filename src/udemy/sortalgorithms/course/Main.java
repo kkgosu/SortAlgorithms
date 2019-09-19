@@ -9,7 +9,9 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
-        LinkedList<Employee> employees = new LinkedList<>();
+
+        udemy.search.course.Main.main();
+/*        LinkedList<Employee> employees = new LinkedList<>();
         employees.add(new Employee("Jane", "Jones", 123));
         employees.add(new Employee("John", "Doe", 5678));
         employees.add(new Employee("Mike", "Wilson", 45));
@@ -18,7 +20,7 @@ public class Main {
         employees.add(new Employee("Bill", "End", 3948));
         employees.add(new Employee("Jane", "Jones", 123));
 
-        employees.forEach(e -> System.out.println(e));
+        employees.forEach(e -> System.out.println(e));*/
         //QueueCourse.main();
 /*        String[] radixArray = {"bcdef", "dbaqc", "abcde", "omadd", "bbbbb"};
         radixSortString(radixArray, 26, 5);
