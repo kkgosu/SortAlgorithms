@@ -1,16 +1,32 @@
 package udemy.sortalgorithms.course;
 
-import udemy.queue.course.QueueCourse;
-import udemy.stacks.course.Employee;
-import udemy.stacks.course.StacksCourse;
+import org.w3c.dom.ls.LSOutput;
+import udemy.trees.course.Tree;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
+        Tree intTree = new Tree();
+        intTree.insert(1);
+        intTree.insert(22);
+        intTree.insert(13);
+        intTree.insert(27);
+        intTree.insert(32);
+        intTree.insert(15);
+        intTree.insert(26);
+        intTree.insert(29);
+        intTree.insert(30);
 
-        udemy.search.course.Main.main();
+        intTree.traverseInOrder();
+
+        System.out.println();
+        System.out.println(intTree.min());
+        System.out.println(intTree.max());
 /*        LinkedList<Employee> employees = new LinkedList<>();
         employees.add(new Employee("Jane", "Jones", 123));
         employees.add(new Employee("John", "Doe", 5678));
